@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-deployment
+  labels:
+    app: consumer-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consumer-deployment
+  template:
+    metadata:
+      labels:
+        app: consumer-deployment
+    spec:
+      containers:
+        - name: consumer-deployment
+          image: keda-kafka-consumer.jar
+          imagePullPolicy: Never
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "125m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"

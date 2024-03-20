@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: producer-deployment
+  labels:
+    app: producer-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: producer-deployment
+  template:
+    metadata:
+
+      labels:
+        app: producer-deployment
+    spec:
+      containers:
+        - name: producer-deployment
+          image: keda-kafka-producer.jar
+          imagePullPolicy: Never
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "125m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          ports:
+          - containerPort: 80
